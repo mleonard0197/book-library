@@ -51,6 +51,7 @@ addButton.addEventListener("click", () => {
     BG.setAttribute("name", "BookGenres");
     BG.setAttribute("placeholder", "Book Genres");
 
+    //Function to create list of genres that can be easily added to and formatted correctly
     function genreMenu() { 
         //list of genres
         var values = ['fantasy', 'mystery', 'sci-fi', 'thriller', 'romance', 'health', 'motivational'];
@@ -73,12 +74,14 @@ addButton.addEventListener("click", () => {
     BW.setAttribute("type", "text");
     BW.setAttribute("name", "BookWishlist");
     BW.setAttribute("placeholder", "Book Wishlist");
-    var readList = ['Read','Not read', 'Wishlist'];
+   
+    var readList = ['read','not read', 'wishlist'];
 
+    //Add wishlist options for dropdown
     for (let i =0; i < 3; i++) {
         var readOption = document.createElement("option");
         readOption.value = readList[i];
-        readOption.text = readList[i];
+        readOption.text = readList[i].charAt(0).toUpperCase() + readList[i].slice(1);
         readOption.setAttribute('id', 'wishlist-option');
         BW.appendChild(readOption);
     }
@@ -104,7 +107,6 @@ addButton.addEventListener("click", () => {
 
         //Append the book genre dropdown menu to the form
         form.appendChild(BG);
-        //form.appendChild(br.cloneNode());
 
         //Append the book wishlist options menu to the form
         form.appendChild(BW);
@@ -139,8 +141,10 @@ addButton.addEventListener("click", () => {
 
 
 });
+
 document.body.appendChild(addButton);
 
+//Array to store Book objects to be displayed on screen when called
 let myLibrary = [];
 
 function Book(title,author,pages,genre, wishlist) {
@@ -155,20 +159,10 @@ function Book(title,author,pages,genre, wishlist) {
 
 
 function addBookToLibrary(title, author, pages, genre, wishlist) {
-
-
     console.log(x);
-    // let title = "";
-    // let author = "";
-    // let pages = 0;
-    // let genre = "";
-
-    // title = prompt("Enter book title.", title);
-    // author = prompt("Enter book author.", author);
-    // pages = prompt("Enter book pages (in numbers)", pages);
-    // genre = prompt("Enter book genre.", genre);
 
     myLibrary[x] = new Book(title,author,pages,genre, wishlist);
     console.log(myLibrary[x]);
     x +=1;
 }
+
