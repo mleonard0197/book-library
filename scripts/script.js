@@ -12,8 +12,13 @@ var br = document.createElement("br");
 //On click, creates the form. On form submit, calls addBookToLibrary
 addButton.addEventListener("click", () => {
 
+    if (document.getElementById('book-form')) {
+        return;
+    }
+    
     //Create form dynamically
     var form = document.createElement('form');
+    form.setAttribute('id', 'book-form');
 
     //Create input for title
     var BT = document.createElement('input');
@@ -53,6 +58,7 @@ addButton.addEventListener("click", () => {
         //goes through each value of values array and capitalizes and appends the genre to the list of options
         for (const val of values) {
             var option = document.createElement("option");
+            option.setAttribute('id','genre-option')
             option.value = val;
             option.text = val.charAt(0).toUpperCase() + val.slice(1);
             BG.appendChild(option);
@@ -71,8 +77,9 @@ addButton.addEventListener("click", () => {
 
     for (let i =0; i < 3; i++) {
         var readOption = document.createElement("option");
-        readOption.value = i;
+        readOption.value = readList[i];
         readOption.text = readList[i];
+        readOption.setAttribute('id', 'wishlist-option');
         BW.appendChild(readOption);
     }
 
@@ -115,7 +122,12 @@ addButton.addEventListener("click", () => {
 
             var bookTitle = document.getElementById('title').value;
             var bookAuth = document.getElementById('author').value;
-            console.log(bookTitle,bookAuth);
+            var bookPages = document.getElementById('pages').value;
+
+            var bookGenre = BG.options[BG.selectedIndex].value;
+            var bookWish = BW.options[BW.selectedIndex].value;
+
+            addBookToLibrary(bookTitle, bookAuth, bookPages, bookGenre, bookWish);
             
             //remove form from page after submitting
             form.remove();
@@ -131,21 +143,21 @@ document.body.appendChild(addButton);
 
 let myLibrary = [];
 
-function Book(title,author,pages,genre) {
+function Book(title,author,pages,genre, wishlist) {
     //sets up title(STRING), author(STRING), pages(INT), and genre(STRING)
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.genre = genre;
+    this.wishlist = wishlist;
 }
 
 
 
-function addBookToLibrary() {
+function addBookToLibrary(title, author, pages, genre, wishlist) {
 
 
     console.log(x);
-
     // let title = "";
     // let author = "";
     // let pages = 0;
@@ -156,7 +168,7 @@ function addBookToLibrary() {
     // pages = prompt("Enter book pages (in numbers)", pages);
     // genre = prompt("Enter book genre.", genre);
 
-    //myLibrary[x] = new Book(title,author,pages,genre);
-    //console.log(myLibrary[x]);
+    myLibrary[x] = new Book(title,author,pages,genre, wishlist);
+    console.log(myLibrary[x]);
     x +=1;
 }
