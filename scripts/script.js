@@ -1,4 +1,3 @@
-
 const addButton = document.createElement('button');
 addButton.innerHTML = "ADD BOOK";
 addButton.id = 'add';
@@ -137,12 +136,27 @@ addButton.addEventListener("click", () => {
 
 
         //Append the form to document body
-        document.getElementsByTagName("body")[0].appendChild(form);
+        //document.getElementsByTagName("body")[0].appendChild(form);
+        document.getElementById('submit-container').appendChild(form);
 
 
 });
 
-document.body.appendChild(addButton);
+
+
+document.getElementById('submit-container').appendChild(addButton);
+
+
+const displayButton = document.createElement('button');
+displayButton.innerHTML = 'DISPLAY ALL BOOKS';
+
+
+
+
+document.body.appendChild(displayButton);
+
+
+
 
 //Array to store Book objects to be displayed on screen when called
 let myLibrary = [];
@@ -166,3 +180,8 @@ function addBookToLibrary(title, author, pages, genre, wishlist) {
     x +=1;
 }
 
+function displayAllBooks() {
+    for (book in myLibrary) {
+       //Append each book in myLibrary to the div 'library-container'
+    }
+}
