@@ -150,7 +150,7 @@ document.getElementById('submit-container').appendChild(addButton);
 const displayButton = document.createElement('button');
 displayButton.innerHTML = 'DISPLAY ALL BOOKS';
 
-
+displayButton.addEventListener("click", displayAllBooks);
 
 
 document.body.appendChild(displayButton);
@@ -162,7 +162,7 @@ document.body.appendChild(displayButton);
 let myLibrary = [];
 
 function Book(title,author,pages,genre, wishlist) {
-    //sets up title(STRING), author(STRING), pages(INT), and genre(STRING)
+    //sets up title(STRING), author(STRING), pages(INT), genre(STRING), and wishlist(STRING)
     this.title = title;
     this.author = author;
     this.pages = pages;
@@ -180,8 +180,20 @@ function addBookToLibrary(title, author, pages, genre, wishlist) {
     x +=1;
 }
 
+
 function displayAllBooks() {
+    //checks to see if library-container
+    if (document.getElementById('library-container').hasChildNodes()) {
+        while (document.getElementById('library-container').firstChild) {
+            document.getElementById('library-container').removeChild(document.getElementById('library-container').firstChild);
+        }
+    }
     for (book in myLibrary) {
        //Append each book in myLibrary to the div 'library-container'
+        const bookInfo = document.createElement('div');
+        bookInfo.innerHTML = 
+        'Title: ' + myLibrary[book].title + " Author: " + myLibrary[book].author + " Pages: " + myLibrary[book].pages;
+        document.getElementById('library-container').appendChild(bookInfo);
+        console.log(book);
     }
 }

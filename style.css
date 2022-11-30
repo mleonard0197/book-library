@@ -1,3 +1,24 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+#library-container {
+    height: auto;
+}
+
+#lower-container {
+    height: 4rem;
+}
+
+div {
+    border: 2px solid black;
+}
+
+
+
 #add {
     font-size: 18px;
     color: rgb(244, 148, 84);
