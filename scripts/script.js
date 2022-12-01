@@ -211,7 +211,8 @@ function displayAllBooks() {
         bookInfo.setAttribute('data-index-number', book);
         //Displays book info in div HTML
         bookInfo.innerHTML = 
-        'Title: ' + myLibrary[book].title + " Author: " + myLibrary[book].author + " Pages: " + myLibrary[book].pages;
+        'Title: ' + myLibrary[book].title + "Author: " + myLibrary[book].author + " Pages: " + myLibrary[book].pages + 
+        " Genre: " + myLibrary[book].genre + " Read Status: " + myLibrary[book].wishlist;
         
         //Adding remove button to bookInfo div
         const removeButton = document.createElement('button');
@@ -224,11 +225,13 @@ function displayAllBooks() {
            
         });
 
+        //Adding read status button to change wishlist options from 'wishlist to read then to not read'
         const readStatus = document.createElement('button');
         readStatus.setAttribute('id','read-status');
         readStatus.innerHTML = "READ/NOT READ";
         readStatus.addEventListener('click', () => {
             myLibrary[readStatus.parentElement.getAttribute('data-index-number')].changeReadStatus();
+            displayAllBooks();
         });
         bookInfo.appendChild(readStatus);
         bookInfo.appendChild(removeButton);

@@ -8,6 +8,7 @@ body {
 }
 
 #library-container {
+    
     min-height: 22px;
     max-height: auto;
 }
@@ -19,13 +20,22 @@ body {
  
 #book-info {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
     background-color: rgb(173, 250, 229);
 }
 
 #remove-button {
+    display: flex;
     justify-self: flex-end;
 }
 
+#read-status {
+    display: flex;
+    justify-self: flex-end;
+    align-self: flex-end;
+}
 
 #add {
     font-size: 18px;
