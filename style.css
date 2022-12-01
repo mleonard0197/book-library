@@ -3,20 +3,28 @@ body {
     flex-direction: column;
 }
 
-
+.storage {
+    border: 2px solid black;
+}
 
 #library-container {
-    height: auto;
+    min-height: 22px;
+    max-height: auto;
 }
 
 #lower-container {
     height: 4rem;
 }
 
-div {
-    border: 2px solid black;
+ 
+#book-info {
+    display: flex;
+    background-color: rgb(173, 250, 229);
 }
 
+#remove-button {
+    justify-self: flex-end;
+}
 
 
 #add {

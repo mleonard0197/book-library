@@ -161,13 +161,27 @@ document.body.appendChild(displayButton);
 //Array to store Book objects to be displayed on screen when called
 let myLibrary = [];
 
-function Book(title,author,pages,genre, wishlist) {
+function Book(title,author,pages,genre, wishlist, indices) {
     //sets up title(STRING), author(STRING), pages(INT), genre(STRING), and wishlist(STRING)
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.genre = genre;
     this.wishlist = wishlist;
+    this.indices = indices;
+}
+
+
+Book.prototype.changeReadStatus = function() {
+    if (this.wishlist == 'read') {
+        this.wishlist = 'not read';
+    }
+    else if (this.wishlist == 'not read') {
+        this.wishlist = 'read';
+    }
+    else if (this.wishlist == 'wishlist') {
+        this.wishlist = 'not read';
+    }
 }
 
 
@@ -180,6 +194,7 @@ function addBookToLibrary(title, author, pages, genre, wishlist) {
     x +=1;
 }
 
+let numB = 0;
 
 function displayAllBooks() {
     //checks to see if library-container
@@ -191,9 +206,35 @@ function displayAllBooks() {
     for (book in myLibrary) {
        //Append each book in myLibrary to the div 'library-container'
         const bookInfo = document.createElement('div');
+        bookInfo.setAttribute('id','book-info');
+        //Used for remove to remove parent data index from myLibrary
+        bookInfo.setAttribute('data-index-number', book);
+        //Displays book info in div HTML
         bookInfo.innerHTML = 
         'Title: ' + myLibrary[book].title + " Author: " + myLibrary[book].author + " Pages: " + myLibrary[book].pages;
+        
+        //Adding remove button to bookInfo div
+        const removeButton = document.createElement('button');
+        removeButton.setAttribute('id', 'remove-button');
+        removeButton.innerHTML = "REMOVE";
+        removeButton.addEventListener('click', () => {
+            console.log(book);
+            myLibrary.splice(removeButton.parentElement.getAttribute('data-index-number'),1);
+            removeButton.parentElement.remove();
+           
+        });
+
+        const readStatus = document.createElement('button');
+        readStatus.setAttribute('id','read-status');
+        readStatus.innerHTML = "READ/NOT READ";
+        readStatus.addEventListener('click', () => {
+            myLibrary[readStatus.parentElement.getAttribute('data-index-number')].changeReadStatus();
+        });
+        bookInfo.appendChild(readStatus);
+        bookInfo.appendChild(removeButton);
+
+
         document.getElementById('library-container').appendChild(bookInfo);
-        console.log(book);
+        //console.log(book);
     }
 }
